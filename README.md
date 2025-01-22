@@ -1,7 +1,7 @@
 ## Analysing relationships between Valence (Mood) <br> and Audio Features in the *Spotify Tracks Dataset*
 
-This repository contains analysis of the *Spotify Tracks Dataset*, available [here](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset), which is a tabular dataset of music
-tracks that are available on the popular music streaming platform, Spotify.
+This repository contains analysis of the *Spotify Tracks Dataset*, (available [here](https://github.com/robert-jacques/introdsRProject/blob/main/data/data.csv) and directly from
+[Kaggle](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset)), which is a tabular dataset of musictracks that are available on the popular music streaming platform, Spotify.
 Each of the 114,000 tracks in the dataset is associated with a range of audio features, each of which provides a measurement of a particular musical characteristic, across 12 attributes in total.
 
 The analysis was written using R and RStudio, and the code is designed to be run in RStudio. The R code can be found [here](https://github.com/robert-jacques/introdsRProject/blob/main/code.R).
