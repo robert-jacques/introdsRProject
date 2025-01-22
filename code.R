@@ -80,7 +80,7 @@ summary(spotify)
 
 
 spotify_audio_features <- spotify %>%                                               # Select variables of interest (Valence and
-  select(danceability, energy, key, loudness, mode,                                 # Audio Features).
+  select(danceability, energy, key, loudness, mode,                                 # audio features).
          speechiness, acousticness, instrumentalness,
          liveness, valence, tempo, time_signature)
   
@@ -105,7 +105,7 @@ summary(spotify_audio_features)                                                 
 
 
 audio_features_hist_01 <- ggplot(spotify_audio_features, aes(x = danceability)) +   # Plot histograms to visualise distribution
-  geom_histogram(binwidth = 0.05, fill = "darkblue", colour = "black",              # of the selected Audio Features.
+  geom_histogram(binwidth = 0.05, fill = "darkblue", colour = "black",              # of the selected audio features.
                  linewidth = 0.2, alpha = 0.6) +
   scale_y_continuous(limits = c(0, 12500)) +
   labs(x = "Danceability", y = "Frequency") +
@@ -234,7 +234,7 @@ spotify_audio_features_long <- spotify_audio_features %>%                       
 
 
 audio_features_box_01 <- ggplot(spotify_audio_features_long,                        # Plot boxplots to further visualise
-                             aes(x = attribute, y = value)) +                       # distribution of Audio Features.          
+                             aes(x = attribute, y = value)) +                       # distribution of audio features.          
   geom_boxplot(fill = brewer.pal(8, "Set2")[1],                                     
                colour = "black",
                alpha = 0.6,
@@ -268,7 +268,7 @@ audio_features_box_01
 
 
 audio_features_scat_01 <- ggplot(spotify_audio_features,                            # Plot scatterplots of Valence vs. other
-                                 aes(x = valence, y = danceability)) +              # Audio Features to visualise            
+                                 aes(x = valence, y = danceability)) +              # audio features to visualise            
   geom_point(size = 0.1, colour = "darkorange", alpha = 0.5) +                      # relationships.
   labs(x = "Valence", y = "Danceability") +
   theme_minimal()
@@ -369,15 +369,15 @@ audio_features_scat_sum
 #############
 
 
-spotify_audio_features_cor_matrix <- cor(spotify_audio_features)                    # Correlation matrix of Audio Features.
+spotify_audio_features_cor_matrix <- cor(spotify_audio_features)                    # Correlation matrix of audio features.
                                                                                     
 spotify_audio_features_cor_matrix                                                   # Calculate numeric correlations between
-                                                                                    # Audio Features.
+                                                                                    # audio features.
 
 spotify_audio_features_cor_matrix_melted <- melt(spotify_audio_features_cor_matrix)
 
 
-audio_features_cor_heatmap_01 <- ggplot(spotify_audio_features_cor_matrix_melted,   # Plot correlation heatmap of Audio Features
+audio_features_cor_heatmap_01 <- ggplot(spotify_audio_features_cor_matrix_melted,   # Plot correlation heatmap of audio features
                                         aes(x = Var1, y = Var2, fill = value)) +    # to visualise relationships.
   geom_tile() +
   scale_fill_gradient2(low = "#4575b4", mid = "white", high = "#d73027",
@@ -411,7 +411,7 @@ spotify_audio_features_valence_cor_matrix <-
                                                                                  
                                                                                     
 spotify_audio_features_valence_cor_matrix                                           # Calculate numeric correlations between
-                                                                                    # Valence and other Audio Features.
+                                                                                    # Valence and other audio features.
 
 spotify_audio_features_cor_matrix_melted %>%                                        # Check for multicollinearity (No values
   filter(abs(value) > 0.8 & Var1 != Var2)                                           # > 0.8 so no further action required).
@@ -424,7 +424,7 @@ spotify_audio_features_cor_matrix_melted %>%                                    
 
 
 spotify_audio_features <- spotify %>%                                               # Re-select variables of interest (Valence
-  select(danceability, energy, key, loudness, mode,                                 # and Audio Features).
+  select(danceability, energy, key, loudness, mode,                                 # and audio features).
          speechiness, acousticness, instrumentalness,
          liveness, valence, tempo, time_signature)
 
@@ -554,7 +554,7 @@ plot(spotify_audio_features_model, which = 2)                                   
 
 spotify_pca_data <- prcomp(spotify_audio_features[, c(1:9, 11, 12)], scale. = TRUE)
                                                                                     # Perform Principal Component Analysis
-                                                                                    # (PCA) on Audio Features excluding
+                                                                                    # (PCA) on audio features excluding
                                                                                     # Valence.
 
 summary(spotify_pca_data)                                                           # Summarise PCA results (proportion
@@ -668,9 +668,9 @@ plot(spotify_pca_model, which = 2)                                              
 
 
 spotify_audio_features_model_scat_01 <- ggplot(spotify_audio_features_data.test_copy,
-                                               aes(x = valence, y = predicted)) +
-  geom_point(size = 0.2, colour = brewer.pal(3, "Set2")[1], alpha = 0.7, ) +
-  geom_smooth(method = "lm", colour = brewer.pal(3, "Set2")[2], se = FALSE) +
+                                               aes(x = valence, y = predicted)) +   # Plot predicted vs actual Valence
+  geom_point(size = 0.2, colour = brewer.pal(3, "Set2")[1], alpha = 0.7, ) +        # for baseline multiple linear
+  geom_smooth(method = "lm", colour = brewer.pal(3, "Set2")[2], se = FALSE) +       # regression model.
   labs(title = "Baseline model (1)",
        x = "Actual Valence", y = "Predicted Valence") +
   scale_y_continuous(limits = c(-0.05, 1)) +
@@ -678,9 +678,9 @@ spotify_audio_features_model_scat_01 <- ggplot(spotify_audio_features_data.test_
   theme(plot.title = element_text(size = 14, face = "bold", hjust = 0.5))
 
 
-spotify_pca_model_scat_01 <- ggplot(spotify_pca_data.test_copy,
-                                    aes(x = valence, y = predicted)) +
-  geom_point(size = 0.2, colour = brewer.pal(3, "Set2")[3], alpha = 0.7) +
+spotify_pca_model_scat_01 <- ggplot(spotify_pca_data.test_copy,                     # Plot predicted vs actual Valence
+                                    aes(x = valence, y = predicted)) +              # for PCA-based multiple linear
+  geom_point(size = 0.2, colour = brewer.pal(3, "Set2")[3], alpha = 0.7) +          # regression model.
   geom_smooth(method = "lm", colour = brewer.pal(3, "Set2")[2], se = FALSE) +
   labs(title = "PCA-based model (2)",
        x = "Actual Valence", y = "Predicted Valence") +
@@ -689,8 +689,9 @@ spotify_pca_model_scat_01 <- ggplot(spotify_pca_data.test_copy,
   theme(plot.title = element_text(size = 14, face = "bold", hjust = 0.5))
 
 
-spotify_audio_features_model_scat_sum <- (spotify_audio_features_model_scat_01 | spotify_pca_model_scat_01) +
-  plot_layout(guides = "collect") +
+spotify_audio_features_model_scat_sum <- (spotify_audio_features_model_scat_01 |    # Faceted plot of predicted vs
+                                            spotify_pca_model_scat_01) +            # actual Valence plots for visual
+  plot_layout(guides = "collect") +                                                 # summary.
   plot_annotation(title = "Predicted vs Actual Valence",
                   subtitle = "Baseline and PCA-based multiple linear regression models",
                   caption = "Source: Spotify Tracks Dataset") &
